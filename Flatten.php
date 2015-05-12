@@ -81,7 +81,7 @@ class Flatten {
     /**
      * @param $data
      *
-     * Used for testing / development purposes
+     * Used for testing / development purposes in lieu of Laravel's dd()
      */
     protected function displayJson($data)
     {
