@@ -25,14 +25,20 @@ class Flatten {
     }
 
     /**
-     * @return bool
-     * Returns true on successful write
+     * @param array $input
+     *   Takes an optional array and returns the flattened array
+     *   If left blank we will read from / write to files instead
+     * @return array / bool
      */
-    public function run()
+    public function run(array $input = null)
     {
-        $source = $this->readJsonFile($this->source);
+        $data = $input ?: $this->readJsonFile($this->source);
 
-        $flat = $this->flatten($source);
+        $flat = $this->flatten($data);
+
+        if ( ! is_null($input) ) {
+            return $flat;
+        }
 
         return $this->writeJsonFile($this->destination, $flat);
     }
