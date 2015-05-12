@@ -37,12 +37,20 @@ class Flatten {
         return $this->writeJsonFile($this->destination, $flat);
     }
 
+    protected function checkFileExists($filename)
+    {
+        if ( ! file_exists($filename) ) {
+            throw new FileDoesNotExistException("$filename does not exist.");
+        }
+    }
+
     /**
      * @param $filename
      * @return array
      */
     protected function readJsonFile($filename)
     {
+        $this->checkFileExists($filename);
         $data = file_get_contents($filename);
 
         return json_decode($data);

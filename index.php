@@ -1,5 +1,6 @@
 <?php
 
+require('Exceptions.php');
 require('Flatten.php');
 
 $flatten = new Flatten();
