@@ -37,6 +37,20 @@ class Flatten {
         return $this->writeJsonFile($this->destination, $flat);
     }
 
+    public function loadConfig($filename)
+    {
+        $this->checkFileExists($filename);
+
+        $config = include($filename);
+
+        if ( ! array_key_exists('source', $config) || ! array_key_exists('destination', $config) ) {
+            throw new UnexpectedValueException("Please ensure '$filename' specifies a source and a destination");
+        }
+
+        $this->source = $config['source'];
+        $this->destination = $config['destination'];
+    }
+
     protected function checkFileExists($filename)
     {
         if ( ! file_exists($filename) ) {
